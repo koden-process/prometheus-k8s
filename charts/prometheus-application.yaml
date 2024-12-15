@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus # Nom de l'application dans ArgoCD
+  namespace: argocd # Namespace où ArgoCD est installé
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts # URL du repo Helm
+    chart: prometheus # Nom du chart Helm
+    targetRevision: latest # Version du chart à utiliser (latest, ou une version spécifique)
+    helm:
+      valueFiles:
+        - values.yaml # Chemin vers le fichier values.yaml dans votre repo
+  destination:
+    server: https://kubernetes.default.svc # Cluster cible (ici, le cluster actuel)
+    namespace: monitoring # Namespace où Prometheus sera installé
+  syncPolicy:
+    automated:
+      prune: true # Supprime les ressources obsolètes lors d'une mise à jour
+      selfHeal: true # Réapplique automatiquement si des ressources sont modifiées
