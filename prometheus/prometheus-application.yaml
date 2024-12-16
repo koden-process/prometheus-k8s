@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts # URL du repo Helm
-    chart: prometheus # Nom du chart Helm
-    targetRevision: 26.0.1  # Version du chart à utiliser (latest, ou une version spécifique)
+    chart: kube-prometheus-stack # Nom du chart Helm
+    targetRevision: 66.7.1  # Version du chart à utiliser (latest, ou une version spécifique)
     helm:
       valueFiles:
         - values.yaml # Chemin vers le fichier values.yaml dans votre repo
